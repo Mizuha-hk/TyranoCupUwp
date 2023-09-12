@@ -60,10 +60,10 @@
     <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
     <PackageCertificateThumbprint>891B2330ED4EA4ABFDF10F465AA520BB78D76D91</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <AppInstallerUri>https://tyranoreleasestorage.z11.web.core.windows.net/</AppInstallerUri>
+    <AppInstallerUri>https://mizuha-hk.github.io/TyranoReleasePage</AppInstallerUri>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AppxBundle>Always</AppxBundle>

@@ -7,13 +7,13 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="11cd1915-6a91-41a3-b1ae-fa06fa9d6c0a"
+    Name="9b4ce48e-903e-4d7b-b960-c143aff755d0"
     Publisher="CN=Mizuha"
     Version="0.0.0.0" />
 
   <Properties>
-    <DisplayName>TyranoCupUwpApp.Package</DisplayName>
-    <PublisherDisplayName>hkhar</PublisherDisplayName>
+    <DisplayName>TyranoCupUwpApp</DisplayName>
+    <PublisherDisplayName>Mizuha</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 

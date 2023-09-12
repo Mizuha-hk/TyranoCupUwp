@@ -162,10 +162,6 @@
       <Project>{9a8373a5-dd73-4581-a60e-cfd6fcbe5da2}</Project>
       <Name>TyranoCupUwpApp.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TyranoCupUwpApp\TyranoCupUwpApp.csproj">
-      <Project>{8eb42153-ac2e-4745-abc0-1c7fb9356b75}</Project>
-      <Name>TyranoCupUwpApp</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

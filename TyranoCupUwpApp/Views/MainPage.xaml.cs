@@ -35,7 +35,7 @@ namespace TyranoCupUwpApp
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             CounterObj.Increment();
-            Counter.Text = $"Count : {CounterObj.Count}";
+            CounterText.Text = $"Count : {CounterObj.Count}";
         }
     }
 }

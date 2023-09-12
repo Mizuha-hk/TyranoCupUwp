@@ -17,7 +17,7 @@
             Click="Button_Click"
             Margin="8"/>
         <TextBlock
-            x:Name="Counter"
+            x:Name="CounterText"
             Text="Count : 0"
             Margin="8"/>
     </StackPanel>

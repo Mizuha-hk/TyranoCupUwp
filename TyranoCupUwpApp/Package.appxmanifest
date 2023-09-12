@@ -8,14 +8,14 @@
 
   <Identity
     Name="9b4ce48e-903e-4d7b-b960-c143aff755d0"
-    Publisher="CN=hkhar"
-    Version="1.0.0.0" />
+    Publisher="CN=Mizuha"
+    Version="0.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="9b4ce48e-903e-4d7b-b960-c143aff755d0" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>TyranoCupUwpApp</DisplayName>
-    <PublisherDisplayName>hkhar</PublisherDisplayName>
+    <PublisherDisplayName>Mizuha</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

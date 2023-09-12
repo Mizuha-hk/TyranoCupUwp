@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using TyranoCupUwpApp.Shared;
+
 // 空白ページの項目テンプレートについては、https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x411 を参照してください
 
 namespace TyranoCupUwpApp
@@ -25,14 +27,15 @@ namespace TyranoCupUwpApp
         public MainPage()
         {
             this.InitializeComponent();
+            
         }
 
-        private int Count = 0;
+        private Counter CounterObj { get; } = new Counter();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Count++;
-            Counter.Text = $"Count : {Count}";
+            CounterObj.Increment();
+            Counter.Text = $"Count : {CounterObj.Count}";
         }
     }
 }

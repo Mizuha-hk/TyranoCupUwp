@@ -164,12 +164,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TyranoCupUwpApp.Shared\TyranoCupUwpApp.Shared.csproj">
-      <Project>{9a8373a5-dd73-4581-a60e-cfd6fcbe5da2}</Project>
-      <Name>TyranoCupUwpApp.Shared</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Package.appinstaller" />
     <None Include="TyranoCupUwpApp.Package_TemporaryKey.pfx" />
   </ItemGroup>
@@ -178,6 +172,15 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Strings\ja-JP\MainPageResource.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TyranoCupUwpApp.Shared\TyranoCupUwpApp.Shared.csproj">
+      <Project>{9a8373a5-dd73-4581-a60e-cfd6fcbe5da2}</Project>
+      <Name>TyranoCupUwpApp.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

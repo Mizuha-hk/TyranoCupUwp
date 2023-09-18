@@ -26,16 +26,7 @@ namespace TyranoCupUwpApp
     {
         public MainPage()
         {
-            this.InitializeComponent();
-            
-        }
-
-        private Counter CounterObj { get; } = new Counter();
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CounterObj.Increment();
-            CounterText.Text = $"Count : {CounterObj.Count}";
-        }
+            this.InitializeComponent();           
+        }  
     }
 }

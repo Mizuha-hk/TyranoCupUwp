@@ -6,19 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center">
-        <Button
-            HorizontalAlignment="Center"
-            Content="Sample"
-            Click="Button_Click"
-            Margin="8"/>
-        <TextBlock
-            x:Name="CounterText"
-            Text="Count : 0"
-            Margin="8"/>
-    </StackPanel>
+    <Grid>
+        
+    </Grid>
 </Page>

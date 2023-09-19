@@ -11,6 +11,7 @@ namespace TyranoCupUwpApp.Shared.api
         void Schedule(
             string tag,
             string text,
+            string audioGuid,
             DateTime deliveryTime);
 
         void Remove(string tag);
@@ -18,6 +19,7 @@ namespace TyranoCupUwpApp.Shared.api
         void Reschedule(
             string tag,
             string text,
+            string audioGuid,
             DateTime? deliveryTime);
     }
 }

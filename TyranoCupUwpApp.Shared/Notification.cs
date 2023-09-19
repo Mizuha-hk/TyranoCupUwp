@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Toolkit.Uwp.Notifications; // Notifications library
 using TyranoCupUwpApp.Shared.api;
+using Windows.ApplicationModel;
+using Windows.Foundation.Metadata;
+using Windows.System.Profile;
 using Windows.UI.Notifications;
 
 namespace TyranoCupUwpApp.Shared
@@ -14,9 +17,26 @@ namespace TyranoCupUwpApp.Shared
         public void Schedule(
             string tag,
             string text,
+            string audioGuid,
             DateTime deliveryTime)
         {
-            new ToastContentBuilder()
+            var contentBuilder = new ToastContentBuilder();
+            bool supportsCustomAudio = true;
+
+            // If we're running on Desktop before Version 1511, do NOT include custom audio
+            // since it was not supported until Version 1511, and would result in a silent toast.
+            if (AnalyticsInfo.VersionInfo.DeviceFamily.Equals("Windows.Desktop")
+                && !ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 2))
+            {
+                supportsCustomAudio = false;
+            }
+
+            if (supportsCustomAudio && audioGuid.Length != 0)
+            {
+                contentBuilder.AddAudio(new Uri("ms-appx:///" + audioGuid + ".wav"));
+            }
+
+            contentBuilder
                 .AddText(text)
                 .Schedule(deliveryTime, toast =>
                 {
@@ -38,6 +58,7 @@ namespace TyranoCupUwpApp.Shared
         public void Reschedule(
             string tag,
             string text,
+            string audioGuid,
             DateTime? deliveryTime)
         {
             ToastNotifierCompat notifier = ToastNotificationManagerCompat.CreateToastNotifier();
@@ -48,7 +69,7 @@ namespace TyranoCupUwpApp.Shared
             {
                 notifier.RemoveFromSchedule(toRemove);
             }
-            Schedule(tag, text, deliveryTime ?? prevDeliveryTime);
+            Schedule(tag, text, audioGuid, deliveryTime ?? prevDeliveryTime);
         }
     }
 }

@@ -5,11 +5,35 @@
     xmlns:local="using:TyranoCupUwpApp.Views.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:TyranoCupUwpApp.Models"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    MaxHeight="200">
 
     <Grid>
+        <ScrollViewer>
+            <ListView
+                x:Name="AppDescription"
+                ItemsSource="{x:Bind ScheduleDetailsList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:ScheduleDetails">
+                        <StackPanel>
+                            <TextBlock
+                                Text="{x:Bind Title}"/>
+                            <TextBlock
+                                Text="{x:Bind StartTime}"/>
+                            <TextBlock
+                                Text="{x:Bind EndTime}"/>
+                            <TextBlock
+                                Text="{x:Bind Location}"/>
+                        </StackPanel>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+            </ListView>
+        </ScrollViewer>
 
     </Grid>
 </UserControl>

@@ -14,7 +14,7 @@
         <controls:NavigationView
             IsBackButtonVisible="Collapsed"
             PaneDisplayMode="Auto"
-            CompactModeThresholdWidth="1008" 
+            CompactModeThresholdWidth="1008"         
             >
             <controls:NavigationView.MenuItems>
                 <controls:NavigationViewItem>
@@ -22,7 +22,7 @@
                         x:Name="SideCalendar"
                         HorizontalAlignment="Center"
                         FontSize="10"
-                        Height="280"
+                        Height="272"
                         >
                         <CalendarView.CalendarViewDayItemStyle>
                             <Style TargetType="CalendarViewDayItem">
@@ -34,6 +34,9 @@
                             </Style>
                         </CalendarView.CalendarViewDayItemStyle>
                     </CalendarView>
+                </controls:NavigationViewItem>
+                <controls:NavigationViewItem>
+                    <TyControls:AppointmentDescription/>
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
 

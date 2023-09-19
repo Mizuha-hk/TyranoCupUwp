@@ -11,5 +11,7 @@ namespace TyranoCupUwpApp.Shared.api
         void Schedule(
             string text,
             DateTime deliveryTime);
+
+        void Remove();
     }
 }

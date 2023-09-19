@@ -13,6 +13,7 @@ namespace TyranoCupUwpApp.Test
         {
             Notification notification = new Notification();
             notification.Schedule("hoge", DateTime.Now.AddSeconds(10));
+            notification.Remove();
             Assert.IsInstanceOfType(notification, typeof(Notification));
         }
     }

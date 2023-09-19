@@ -165,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Package.appinstaller" />
+    <Content Include="Properties\local.settings.json" />
     <None Include="TyranoCupUwpApp.Package_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

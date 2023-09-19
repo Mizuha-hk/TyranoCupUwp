@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -121,9 +121,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AccessDb.cs" />
+    <Compile Include="api\IRecord.cs" />
     <Compile Include="Counter.cs" />
     <Compile Include="Models\SaveAudioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Record.cs" />
     <EmbeddedResource Include="Properties\TyranoCupUwpApp.Shared.rd.xml" />
   </ItemGroup>
   <ItemGroup>

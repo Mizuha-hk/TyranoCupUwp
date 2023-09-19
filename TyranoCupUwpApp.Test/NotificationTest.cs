@@ -12,8 +12,10 @@ namespace TyranoCupUwpApp.Test
         public void NotificationTest()
         {
             Notification notification = new Notification();
-            notification.Schedule("hoge", DateTime.Now.AddSeconds(10));
-            notification.Remove();
+            notification.Schedule("temp1", "hoge - 1", DateTime.Now.AddSeconds(5));
+            notification.Schedule("temp2", "hoge - 2", DateTime.Now.AddSeconds(7));
+            notification.Reschedule("temp2", "fuga - 2", DateTime.Now.AddSeconds(5));
+            notification.Remove("temp1");
             Assert.IsInstanceOfType(notification, typeof(Notification));
         }
     }

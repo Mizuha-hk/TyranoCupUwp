@@ -9,9 +9,15 @@ namespace TyranoCupUwpApp.Shared.api
     public interface INotification
     {
         void Schedule(
+            string tag,
             string text,
             DateTime deliveryTime);
 
-        void Remove();
+        void Remove(string tag);
+
+        void Reschedule(
+            string tag,
+            string text,
+            DateTime? deliveryTime);
     }
 }

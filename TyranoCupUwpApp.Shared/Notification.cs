@@ -11,31 +11,44 @@ namespace TyranoCupUwpApp.Shared
 {
     public class Notification: INotification
     {
-        private string _tag;
-        public Notification() { }
-
         public void Schedule(
+            string tag,
             string text,
             DateTime deliveryTime)
         {
-            _tag = Guid.NewGuid().ToString();
             new ToastContentBuilder()
                 .AddText(text)
                 .Schedule(deliveryTime, toast =>
                 {
-                    toast.Tag = _tag;
+                    toast.Tag = tag;
                     toast.Group = "Tyranno";
                 });
         }
 
-        public void Remove() {
+        public void Remove(string tag) {
             ToastNotifierCompat notifier = ToastNotificationManagerCompat.CreateToastNotifier();
             IReadOnlyList<ScheduledToastNotification> scheduledToasts = notifier.GetScheduledToastNotifications();
-            var toRemove = scheduledToasts.FirstOrDefault(i => i.Tag == _tag && i.Group == "Tyranno");
+            var toRemove = scheduledToasts.FirstOrDefault(i => i.Tag == tag && i.Group == "Tyranno");
             if (toRemove != null)
             {
                 notifier.RemoveFromSchedule(toRemove);
             }
+        }
+
+        public void Reschedule(
+            string tag,
+            string text,
+            DateTime? deliveryTime)
+        {
+            ToastNotifierCompat notifier = ToastNotificationManagerCompat.CreateToastNotifier();
+            IReadOnlyList<ScheduledToastNotification> scheduledToasts = notifier.GetScheduledToastNotifications();
+            var toRemove = scheduledToasts.FirstOrDefault(i => i.Tag == tag && i.Group == "Tyranno");
+            var prevDeliveryTime = toRemove.DeliveryTime.DateTime;
+            if (toRemove != null)
+            {
+                notifier.RemoveFromSchedule(toRemove);
+            }
+            Schedule(tag, text, deliveryTime ?? prevDeliveryTime);
         }
     }
 }

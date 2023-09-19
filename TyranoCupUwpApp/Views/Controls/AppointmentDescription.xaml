@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
-    MaxHeight="200">
+    MaxHeight="264">
 
     <Grid>
         <ScrollViewer>
@@ -18,16 +18,46 @@
                 ItemsSource="{x:Bind ScheduleDetailsList}">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="model:ScheduleDetails">
-                        <StackPanel>
-                            <TextBlock
-                                Text="{x:Bind Title}"/>
-                            <TextBlock
-                                Text="{x:Bind StartTime}"/>
-                            <TextBlock
-                                Text="{x:Bind EndTime}"/>
-                            <TextBlock
-                                Text="{x:Bind Location}"/>
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition
+                                    Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <FontIcon 
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Margin="0, 0, 4, 0"
+                                FontFamily="Segoe Fluent Icons" 
+                                Glyph="&#xE823;"/>
+                            <Grid
+                                Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                        Height="Auto"/>
+                                    <RowDefinition
+                                        Height="Auto"/>
+                                    <RowDefinition
+                                        Height="Auto"/>
+                                    <RowDefinition
+                                        Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock
+                                    Grid.Row="0"
+                                    FontSize="20"
+                                    Text="{x:Bind Title}"
+                                    TextDecorations="Underline"/>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Text="{x:Bind StartTime}"/>
+                                <TextBlock
+                                    Grid.Row="2"
+                                    Text="{x:Bind EndTime}"/>
+                                <TextBlock
+                                    Grid.Row="3"
+                                    Text="{x:Bind Location}"/>
+                            </Grid>
+                        </Grid>
                         
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TyranoCupUwpApp.Shared.api
 {
-    internal interface IRecord
+    public interface IRecord
     {
-        void StartRecording();
-        void StopRecording();
+        Task StartRecording();
+        Task<string> StopRecording();
     }
 }

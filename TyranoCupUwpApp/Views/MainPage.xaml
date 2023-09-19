@@ -11,13 +11,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TyControls:AppointmentCalendarView>
-
-        </TyControls:AppointmentCalendarView>
         <controls:NavigationView
             IsBackButtonVisible="Collapsed"
             PaneDisplayMode="Auto"
-            CompactModeThresholdWidth="1008">
+            CompactModeThresholdWidth="1008" 
+            >
             <controls:NavigationView.MenuItems>
                 <controls:NavigationViewItem>
                     <CalendarView
@@ -38,7 +36,49 @@
                     </CalendarView>
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
-        </controls:NavigationView>
 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition
+                        Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <controls:NavigationView
+                    PaneDisplayMode="Top"
+                    IsBackButtonVisible="Collapsed">
+                    <TyControls:AppointmentCalendarView/>
+                </controls:NavigationView>
+                
+
+
+
+                <Grid
+                    Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Background="{ThemeResource SystemAccentColorLight1}"
+                        Margin="4">
+                        <FontIcon 
+                            Foreground="White"
+                            FontFamily="Segoe Fluent Icons" 
+                            Glyph="&#xE720;"/>
+                    </Button>
+                    <TextBox
+                        Grid.Column="1"
+                        HorizontalAlignment="Stretch"
+                        PlaceholderText="Type your schedule"
+                        Margin="4">
+                    </TextBox>
+
+                </Grid>
+
+            </Grid>
+        </controls:NavigationView>
     </Grid>
 </Page>

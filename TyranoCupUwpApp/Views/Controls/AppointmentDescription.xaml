@@ -37,12 +37,14 @@
                                 <FontIcon
                                     Grid.Row="1"
                                     VerticalAlignment="Center"
-                                    Margin="0, 0, 4, 0"
+                                    Margin="0, 0, 4, 8"
+                                    FontSize="16"
                                     FontFamily="Segoe Fluent Icons" 
                                     Glyph="&#xE823;"/>
                                 <FontIcon
                                     Grid.Row="2"
                                     Margin="0, 0, 4, 0"
+                                    FontSize="16"
                                     FontFamily="Segoe Fluent Icons"
                                     Glyph="&#xEcaf;"/>
                             </Grid>
@@ -59,6 +61,7 @@
                                         Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <TextBlock
+                                    Margin="0, 4, 0, 0"
                                     Grid.Row="0"
                                     FontSize="20"
                                     Text="{x:Bind Title}"
@@ -70,6 +73,8 @@
                                     Grid.Row="2"
                                     Text="{x:Bind EndTime}"/>
                                 <TextBlock
+                                    Margin="0, 4, 0, 0"
+                                    FontSize="16"
                                     Grid.Row="3"
                                     Text="{x:Bind Location}"/>
                             </Grid>

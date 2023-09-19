@@ -7,22 +7,24 @@ using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using Windows.Storage;
 
+using TyranoCupUwpApp.Shared.api;
 using TyranoCupUwpApp.Shared.Models;
 
 namespace TyranoCupUwpApp.Shared
 {
-    public class AccessDb
+    public class AccessDb : IAccessDb
     {
         private readonly string _connectionString;
 
         public AccessDb()
         {
             _connectionString = $"Filename={Path.Combine(ApplicationData.Current.LocalFolder.Path, "AppData.db")}";
-            InitializeDatabase();
         }
 
-        private async void InitializeDatabase()
+        public async Task InitializeDatabase()
         {
+            SQLitePCL.Batteries.Init();
+
             await ApplicationData.Current.LocalFolder.CreateFileAsync("AppData.db", CreationCollisionOption.OpenIfExists);
             using (var connection = new SqliteConnection(_connectionString))
             {
@@ -83,8 +85,8 @@ namespace TyranoCupUwpApp.Shared
                     {
                         return new SaveAudioModel
                         {
-                            AudioId = reader.GetString(0),
-                            AppointmentId = reader.GetString(1)
+                            AppointmentId = reader.GetString(0),
+                            AudioId = reader.GetString(1)
                         };
                     }
                 }

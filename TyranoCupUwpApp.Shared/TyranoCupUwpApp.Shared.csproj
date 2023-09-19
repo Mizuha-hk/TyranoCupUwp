@@ -120,7 +120,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="api\INotification.cs" />
     <Compile Include="api\IRecord.cs" />
+    <Compile Include="Notification.cs" />
     <Compile Include="Counter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Record.cs" />
@@ -129,6 +131,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
+      <Version>7.1.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.8.5</Version>

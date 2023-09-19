@@ -11,6 +11,34 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        
+        <TyControls:AppointmentCalendarView>
+
+        </TyControls:AppointmentCalendarView>
+        <controls:NavigationView
+            IsBackButtonVisible="Collapsed"
+            PaneDisplayMode="Auto"
+            CompactModeThresholdWidth="1008">
+            <controls:NavigationView.MenuItems>
+                <controls:NavigationViewItem>
+                    <CalendarView
+                        x:Name="SideCalendar"
+                        HorizontalAlignment="Center"
+                        FontSize="10"
+                        Height="280"
+                        >
+                        <CalendarView.CalendarViewDayItemStyle>
+                            <Style TargetType="CalendarViewDayItem">
+                                <Setter Property="MinHeight" Value="10"/>
+                                <Setter Property="MinWidth" Value="10"/>
+                                <Setter Property="Width" Value="32"/>
+                                <Setter Property="Height" Value="32"/>
+                                <Setter Property="FontSize" Value="8"/>
+                            </Style>
+                        </CalendarView.CalendarViewDayItemStyle>
+                    </CalendarView>
+                </controls:NavigationViewItem>
+            </controls:NavigationView.MenuItems>
+        </controls:NavigationView>
+
     </Grid>
 </Page>

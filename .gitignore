@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/TyranoCupUwpApp/Properties/local.settings.json
+/TyranoCupUwpApp.Test/Properties/local.settings.json
+/TyranoCupUwpApp.Shared/Properties/local.settings.json
+/TyranoCupUwpApp.Test/local.settings.json
+/TyranoCupUwpApp.Test/Assets/local.settings.json

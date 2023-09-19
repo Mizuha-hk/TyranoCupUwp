@@ -59,7 +59,8 @@
                         <ColumnDefinition
                             Width="Auto"/>
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition
+                            Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Button
                         Background="{ThemeResource SystemAccentColorLight1}"
@@ -75,6 +76,12 @@
                         PlaceholderText="Type your schedule"
                         Margin="4">
                     </TextBox>
+                    <Button
+                        Grid.Column="2"
+                        Background="{ThemeResource SystemAccentColorLight1}"
+                        Foreground="White"
+                        Margin="4"
+                        Content="New Event"/>
 
                 </Grid>
 

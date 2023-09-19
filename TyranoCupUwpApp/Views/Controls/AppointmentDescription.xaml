@@ -24,12 +24,28 @@
                                     Width="Auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <FontIcon 
-                                Grid.Column="0"
-                                VerticalAlignment="Center"
-                                Margin="0, 0, 4, 0"
-                                FontFamily="Segoe Fluent Icons" 
-                                Glyph="&#xE823;"/>
+                            <Grid
+                                Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                        Height="1*"/>
+                                    <RowDefinition
+                                        Height="2*"/>
+                                    <RowDefinition
+                                        Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <FontIcon
+                                    Grid.Row="1"
+                                    VerticalAlignment="Center"
+                                    Margin="0, 0, 4, 0"
+                                    FontFamily="Segoe Fluent Icons" 
+                                    Glyph="&#xE823;"/>
+                                <FontIcon
+                                    Grid.Row="2"
+                                    Margin="0, 0, 4, 0"
+                                    FontFamily="Segoe Fluent Icons"
+                                    Glyph="&#xEcaf;"/>
+                            </Grid>
                             <Grid
                                 Grid.Column="1">
                                 <Grid.RowDefinitions>

@@ -1,11 +1,20 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TyranoCupUwpApp.Shared.api;
+using TyranoCupUwpApp.Shared.Models;
 
 namespace TyranoCupUwpApp.Shared
 {
     public class OpenAIFormation : IOpenAIFormation
     {
+        private class Data
+        {
+            public string Title { get; private set; }
+            public int[] StartTime { get; private set; }
+            public int[] EndTime { get; private set; }
+            public string Location { get; private set; }
+        }
         public async Task<string> FormatTextToJson(string text)
         {
             ApiKeyManagement apiKeyManagement = ApiKeyManagement.GetInstance();
@@ -36,17 +45,29 @@ namespace TyranoCupUwpApp.Shared
                 "\r\n" +
                 "# 出力文の例：\r\n" +
                 "{ " +
-                    "\"title\": \"ハッカソン\", " +
-                    "\"location\": \"北九州市\", " +
-                    "\"startTime\": [ 2023, 09, 19, 11, 00 ], " +
-                    "\"endTime\": [ 2023, 09, 21, 19, 00 ] " +
+                    "\"Title\": \"ハッカソン\", " +
+                    "\"Location\": \"北九州市\", " +
+                    "\"StartTime\": [ 2023, 9, 19, 11, 0 ], " +
+                    "\"EndTime\": [ 2023, 9, 21, 19, 0 ] " +
                 "}" +
                 "\r\n" +
                 "# 入力文：\r\n" +
                 "{" + text + "}";
             chat.AppendUserInput(prompt);
             string response = await chat.GetResponseFromChatbotAsync();
+            Deserialize(response);
             return response;
+        }
+
+        private void Deserialize(string response)
+        {
+            ScheduleModel scheduleModel = ScheduleModel.GetInstance();
+            scheduleModel.Subject = "" + JsonSerializer.Deserialize<Data>(response).Title;
+            scheduleModel.Location = "" + JsonSerializer.Deserialize<Data>(response).Location;
+            int[] startTime = JsonSerializer.Deserialize<Data>(response).StartTime;
+            int[] endTime = JsonSerializer.Deserialize<Data>(response).EndTime;
+            if (startTime != null) scheduleModel.StartTime = new DateTime(startTime[0], startTime[1], startTime[2], startTime[3], startTime[4], 0);
+            if (endTime != null) scheduleModel.Duration = (new DateTime(endTime[0], endTime[1], endTime[2], endTime[3], endTime[4], 0) - scheduleModel.StartTime);
         }
     }
 }

@@ -4,6 +4,6 @@ namespace TyranoCupUwpApp.Shared.api
 {
     public interface IOpenAIFormation
     {
-        Task<string> FormatTextToJson(string text);
+        Task<string> FormatTextToJson(string text, string apiKey);
     }
 }

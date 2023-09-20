@@ -10,13 +10,11 @@ using Windows.Storage;
 namespace TyranoCupUwpApp.Shared
 {
     public class VoiceRecognition : IVoiceRecognition {
-        public async Task<string> VoiceRecognitionFromWavFile(string wavFile, string language)
+        public async Task<string> VoiceRecognitionFromWavFile(string wavFile, string language, string apiKey)
         {
-            ApiKeyManagement apiKeyManagement = ApiKeyManagement.GetInstance();
-            await apiKeyManagement.Initialize();
             var stopRecognitionTaskCompletionSource = new TaskCompletionSource<int>(
                 TaskCreationOptions.RunContinuationsAsynchronously);
-            if(string.IsNullOrEmpty(apiKeyManagement.SpeechApiKey) || string.IsNullOrEmpty(language))
+            if(string.IsNullOrEmpty(apiKey) || string.IsNullOrEmpty(language))
             {
                 throw new Exception();
             }
@@ -24,7 +22,7 @@ namespace TyranoCupUwpApp.Shared
             StorageFile file = await storageFolder.GetFileAsync(wavFile);
             if(file != null)
             {
-                var config = SpeechConfig.FromSubscription(apiKeyManagement.SpeechApiKey, "japanwest");
+                var config = SpeechConfig.FromSubscription(apiKey, "japanwest");
                 config.SpeechRecognitionLanguage = language;
                 using (var audioInput = AudioConfig.FromWavFileInput(file.Path))
                 {

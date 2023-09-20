@@ -15,11 +15,9 @@ namespace TyranoCupUwpApp.Shared
             public int[] EndTime { get; private set; }
             public string Location { get; private set; }
         }
-        public async Task<string> FormatTextToJson(string text)
+        public async Task<string> FormatTextToJson(string text, string apiKey)
         {
-            ApiKeyManagement apiKeyManagement = ApiKeyManagement.GetInstance();
-            await apiKeyManagement.Initialize();
-            var api = new OpenAI_API.OpenAIAPI(apiKeyManagement.OpenAIApiKey);
+            var api = new OpenAI_API.OpenAIAPI(apiKey);
             var chat = api.Chat.CreateConversation();
 
             string prompt =

@@ -1,8 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TyranoCupUwpApp.Shared;
 using TyranoCupUwpApp.Shared.api;
@@ -26,7 +22,7 @@ namespace TyranoCupUwpApp.Test
         {
             _openAIFormation = new OpenAIFormation();
             await _openAIFormation.GetOpenAIApiKey();
-            string res = await _openAIFormation.FormatTextToJson("2023年9月19日11時から2023年9月21日19時まで北九州市でハッカソンの予定があります。");
+            string res = await _openAIFormation.FormatTextToJson("あした11時からバイトがあります。");
             Assert.IsNotNull(res);
             TestContext.WriteLine("response:" + res);
         }

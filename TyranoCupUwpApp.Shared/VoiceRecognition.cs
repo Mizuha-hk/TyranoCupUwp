@@ -1,10 +1,7 @@
 ﻿using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TyranoCupUwpApp.Shared.api;
@@ -16,6 +13,23 @@ namespace TyranoCupUwpApp.Shared
     public class VoiceRecognition : IVoiceRecognition
     {
         private string SpeechApiKey { get; set; }
+
+        private class ApiKey
+        {
+            public string AzureSpeechApiKey { get; set; }
+        }
+
+        public async Task GetAzureSpeechApiKey()
+        {
+            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Properties/local.settings.json"));
+            string jsonstring =  await FileIO.ReadTextAsync(file);
+            if(string.IsNullOrEmpty(jsonstring))
+            {
+                throw new Exception();
+            }
+            SpeechApiKey = JsonSerializer.Deserialize<ApiKey>(jsonstring).AzureSpeechApiKey;
+        }
+
         public async Task<string> VoiceRecognitionFromWavFile(string wavFile, string language)
         {
             var stopRecognitionTaskCompletionSource = new TaskCompletionSource<int>(
@@ -47,29 +61,12 @@ namespace TyranoCupUwpApp.Shared
                                 result = $"NOMATCH: Speech could not be recognized.";
                             }
                         };
-                        recognizer.Canceled += (s, e) =>
-                        {
-                            StringBuilder sb = new StringBuilder();
-                            sb.AppendLine($"CANCELED: Reason={e.Reason}");
-
-                            if (e.Reason == CancellationReason.Error)
-                            {
-                                sb.AppendLine($"CANCELED: ErrorCode={e.ErrorCode}");
-                                sb.AppendLine($"CANCELED: ErrorDetails={e.ErrorDetails}");
-                                sb.AppendLine($"CANCELED: Did you update the subscription info?");
-                            }
-
-                            result = sb.ToString();
-                        };
                         recognizer.SessionStopped += (s, e) =>
                         {
                             stopRecognitionTaskCompletionSource.TrySetResult(0);
                         };
-                        // Starts continuous recognition. Uses StopContinuousRecognitionAsync() to stop recognition.
                         await recognizer.StartContinuousRecognitionAsync().ConfigureAwait(false);
-                        // Waits for completion.
                         await stopRecognitionTaskCompletionSource.Task.ConfigureAwait(false);
-                        // Stops recognition.
                         await recognizer.StopContinuousRecognitionAsync().ConfigureAwait(false);
                         return result;
                     }
@@ -79,21 +76,5 @@ namespace TyranoCupUwpApp.Shared
                 throw new FileNotFoundException();
             }
         }
-
-        public async Task GetAzureSpeechApiKey()
-        {
-            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Properties/local.settings.json"));
-            string jsonstring =  await FileIO.ReadTextAsync(file);
-            if(string.IsNullOrEmpty(jsonstring))
-            {
-                throw new Exception();
-            }
-            SpeechApiKey = JsonSerializer.Deserialize<ApiKey>(jsonstring).AzureSpeechApiKey;
-        }
-    }
-
-    internal class ApiKey
-    {
-        public string AzureSpeechApiKey { get; set; }
     }
 }

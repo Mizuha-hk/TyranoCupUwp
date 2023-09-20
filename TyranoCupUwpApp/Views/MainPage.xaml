@@ -24,6 +24,7 @@
                         HorizontalAlignment="Center"
                         FontSize="10"
                         Height="272"
+                        SelectedDatesChanged="SideCalendar_SelectedDatesChanged"
                         >
                         <CalendarView.CalendarViewDayItemStyle>
                             <Style TargetType="CalendarViewDayItem">
@@ -52,13 +53,16 @@
                     PaneDisplayMode="Top"
                     IsBackButtonVisible="Collapsed"
                     IsSettingsVisible="False">
-                    <TyControls:CustomCalendar
+                    
+                    <CalendarView
+                        x:Name="MainCalendar"
+                        Style="{StaticResource CustomCalendar}"
+                        CalendarViewDayItemStyle="{StaticResource CustomCalendarDayItems}"
                         Margin="8"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"/>
+                        CalendarViewDayItemChanging="MainCalendar_CalendarViewDayItemChanging"
+                        SelectedDatesChanged="MainCalendar_SelectedDatesChanged"
+                        />
                 </controls:NavigationView>
-
-
 
                 <Grid
                     Grid.Row="1">
@@ -72,9 +76,12 @@
                             Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Button
+                        x:Name="SpeechButton"
                         Background="{ThemeResource SystemAccentColorLight1}"
-                        Margin="4">
+                        Margin="4"
+                        Click="SpeechButton_Click">
                         <FontIcon 
+                            x:Name="SpeechButtonIcon"
                             Foreground="White"
                             FontFamily="Segoe Fluent Icons" 
                             Glyph="&#xE720;"/>

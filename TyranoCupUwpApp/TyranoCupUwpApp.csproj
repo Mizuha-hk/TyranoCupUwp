@@ -129,9 +129,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\SchduleDetails.cs" />
-    <Compile Include="Views\Controls\AppointmentCalendarView.xaml.cs">
-      <DependentUpon>AppointmentCalendarView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Controls\AppointmentDescription.xaml.cs">
       <DependentUpon>AppointmentDescription.xaml</DependentUpon>
     </Compile>

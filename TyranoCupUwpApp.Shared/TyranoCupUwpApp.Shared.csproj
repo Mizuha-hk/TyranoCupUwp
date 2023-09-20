@@ -120,16 +120,45 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AccessDb.cs" />
+    <Compile Include="api\INotification.cs" />
+    <Compile Include="api\IAccessDb.cs" />
+    <Compile Include="api\IOpenAIFormation.cs" />
+    <Compile Include="api\IRecord.cs" />
+    <Compile Include="api\IVoiceRecognition.cs" />
+    <Compile Include="OpenAIFormation.cs" />
+    <Compile Include="Notification.cs" />
     <Compile Include="Counter.cs" />
+    <Compile Include="Models\SaveAudioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Record.cs" />
+    <Compile Include="VoiceRecognition.cs" />
     <EmbeddedResource Include="Properties\TyranoCupUwpApp.Shared.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CognitiveServices.Speech">
+      <Version>1.32.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Data.Sqlite.Core">
+      <Version>7.0.11</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
+      <Version>7.1.3</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.8.5</Version>
+    </PackageReference>
+    <PackageReference Include="OpenAI">
+      <Version>1.7.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>7.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3">
+      <Version>2.1.6</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

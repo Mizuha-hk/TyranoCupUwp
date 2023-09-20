@@ -21,7 +21,6 @@ namespace TyranoCupUwpApp.Test
         public async Task FormationTest()
         {
             _openAIFormation = new OpenAIFormation();
-            await _openAIFormation.GetOpenAIApiKey();
             string res = await _openAIFormation.FormatTextToJson("あした11時からバイトがあります。");
             Assert.IsNotNull(res);
             TestContext.WriteLine("response:" + res);

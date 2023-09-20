@@ -2,7 +2,6 @@
 using Microsoft.CognitiveServices.Speech.Audio;
 using System;
 using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using TyranoCupUwpApp.Shared.api;
 using Windows.ApplicationModel;
@@ -10,31 +9,14 @@ using Windows.Storage;
 
 namespace TyranoCupUwpApp.Shared
 {
-    public class VoiceRecognition : IVoiceRecognition
-    {
-        private string SpeechApiKey { get; set; }
-
-        private class ApiKey
-        {
-            public string AzureSpeechApiKey { get; set; }
-        }
-
-        public async Task GetAzureSpeechApiKey()
-        {
-            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Properties/local.settings.json"));
-            string jsonstring =  await FileIO.ReadTextAsync(file);
-            if(string.IsNullOrEmpty(jsonstring))
-            {
-                throw new Exception();
-            }
-            SpeechApiKey = JsonSerializer.Deserialize<ApiKey>(jsonstring).AzureSpeechApiKey;
-        }
-
+    public class VoiceRecognition : IVoiceRecognition {
         public async Task<string> VoiceRecognitionFromWavFile(string wavFile, string language)
         {
+            ApiKeyManagement apiKeyManagement = ApiKeyManagement.GetInstance();
+            await apiKeyManagement.Initialize();
             var stopRecognitionTaskCompletionSource = new TaskCompletionSource<int>(
                 TaskCreationOptions.RunContinuationsAsynchronously);
-            if(string.IsNullOrEmpty(SpeechApiKey) || string.IsNullOrEmpty(language))
+            if(string.IsNullOrEmpty(apiKeyManagement.SpeechApiKey) || string.IsNullOrEmpty(language))
             {
                 throw new Exception();
             }
@@ -42,7 +24,7 @@ namespace TyranoCupUwpApp.Shared
             StorageFile file = await storageFolder.GetFileAsync(wavFile);
             if(file != null)
             {
-                var config = SpeechConfig.FromSubscription(SpeechApiKey, "japanwest");
+                var config = SpeechConfig.FromSubscription(apiKeyManagement.SpeechApiKey, "japanwest");
                 config.SpeechRecognitionLanguage = language;
                 using (var audioInput = AudioConfig.FromWavFileInput(file.Path))
                 {

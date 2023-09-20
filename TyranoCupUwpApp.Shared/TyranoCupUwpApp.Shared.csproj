@@ -121,6 +121,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AccessDb.cs" />
+    <Compile Include="ApiKeyManagement.cs" />
     <Compile Include="api\ISchedule.cs" />
     <Compile Include="api\INotification.cs" />
     <Compile Include="api\IAccessDb.cs" />

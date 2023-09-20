@@ -134,8 +134,9 @@
     <EmbeddedResource Include="Properties\TyranoCupUwpApp.Shared.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CognitiveServices.Speech">
-      <Version>1.32.1</Version>
+	<PackageReference Include="Microsoft.CognitiveServices.Speech">
+	  <Version>1.32.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Data.Sqlite.Core">
       <Version>7.0.11</Version>
     </PackageReference>
@@ -148,8 +149,9 @@
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.8.5</Version>
     </PackageReference>
-    <PackageReference Include="System.Text.Json">
-      <Version>7.0.3</Version>
+	<PackageReference Include="System.Text.Json">
+		<Version>7.0.3</Version>
+	</PackageReference>
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3">
       <Version>2.1.6</Version>
     </PackageReference>

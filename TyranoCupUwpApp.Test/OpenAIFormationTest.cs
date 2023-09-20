@@ -6,7 +6,7 @@ using TyranoCupUwpApp.Shared.api;
 namespace TyranoCupUwpApp.Test
 {
     [TestClass]
-    public class VoiceRecognitionTest
+    public class OpenAIFormationTest
     {
         private TestContext testContextInstance;
 
@@ -16,15 +16,15 @@ namespace TyranoCupUwpApp.Test
             set { testContextInstance = value; }
         }
 
-        IVoiceRecognition _voiceRecognition;
+        IOpenAIFormation _openAIFormation;
         [TestMethod]
-        public async Task RecognitionTest()
+        public async Task FormationTest()
         {
-            _voiceRecognition = new VoiceRecognition();
-            await _voiceRecognition.GetAzureSpeechApiKey();
-            string str = await _voiceRecognition.VoiceRecognitionFromWavFile("test.wav", "ja-JP");
-            Assert.IsNotNull(str);
-            TestContext.WriteLine("output:" + str);
+            _openAIFormation = new OpenAIFormation();
+            await _openAIFormation.GetOpenAIApiKey();
+            string res = await _openAIFormation.FormatTextToJson("あした11時からバイトがあります。");
+            Assert.IsNotNull(res);
+            TestContext.WriteLine("response:" + res);
         }
     }
 }

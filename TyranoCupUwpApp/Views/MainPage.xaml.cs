@@ -26,7 +26,7 @@ namespace TyranoCupUwpApp
     {
         public MainPage()
         {
-            this.InitializeComponent();           
-        }  
+            this.InitializeComponent();
+        }
     }
 }

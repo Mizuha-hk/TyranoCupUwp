@@ -100,7 +100,55 @@
                         Background="{ThemeResource SystemAccentColorLight1}"
                         Foreground="White"
                         Margin="4"
-                        Content="New Event"/>
+                        Content="New Event">
+                        <Button.Flyout>
+                            <Flyout>
+                                <Flyout.FlyoutPresenterStyle>
+                                    <Style TargetType="FlyoutPresenter">
+                                        <Setter 
+                                            Property="ScrollViewer.HorizontalScrollMode"
+                                            Value="Disabled"/>
+                                        <Setter 
+                                            Property="ScrollViewer.HorizontalScrollBarVisibility" 
+                                            Value="Disabled"/>
+                                        <Setter 
+                                            Property="IsTabStop" 
+                                            Value="True"/>
+                                        <Setter 
+                                            Property="TabNavigation" 
+                                            Value="Cycle"/>
+                                    </Style>
+                                </Flyout.FlyoutPresenterStyle>
+                                <StackPanel>
+                                    <TextBox
+                                        Width="300"
+                                        Header="Schedule Title"/>
+                                    <TextBox
+                                        Margin="0, 8, 0, 0"
+                                        Width="300"
+                                        Header="Location"/>
+                                    <TextBlock
+                                        Margin="0, 8, 0, 0"
+                                        Text="Start Time:"/>
+                                    <DatePicker
+                                        Margin="0, 8"
+                                        x:Name="StartDatePicker"/>
+                                    <TimePicker
+                                        x:Name="StartTimePicker"
+                                        ClockIdentifier="12HourClock"/>
+                                    <TextBlock
+                                        Margin="0, 8, 0, 0"
+                                        Text="End Time"/>
+                                    <DatePicker
+                                        Margin="0, 8"
+                                        x:Name="EndDatePicker"/>
+                                    <TimePicker
+                                        x:Name="EndTimePicker"
+                                        ClockIdentifier="12HourClock"/>                                    
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
 
                 </Grid>
 

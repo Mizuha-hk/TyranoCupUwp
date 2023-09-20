@@ -20,8 +20,10 @@ namespace TyranoCupUwpApp.Test
         [TestMethod]
         public async Task FormationTest()
         {
+            ApiKeyManagement apiKeyManagement = ApiKeyManagement.GetInstance();
+            await apiKeyManagement.Initialize();
             _openAIFormation = new OpenAIFormation();
-            string res = await _openAIFormation.FormatTextToJson("あした11時からバイトがあります。");
+            string res = await _openAIFormation.FormatTextToJson("明日の18時から21時まで最寄りのコンビニでバイト", apiKeyManagement.OpenAIApiKey);
             Assert.IsNotNull(res);
             TestContext.WriteLine("response:" + res);
         }

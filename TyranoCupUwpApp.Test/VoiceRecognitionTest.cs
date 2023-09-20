@@ -20,8 +20,10 @@ namespace TyranoCupUwpApp.Test
         [TestMethod]
         public async Task RecognitionTest()
         {
+            ApiKeyManagement apiKeyManagement = ApiKeyManagement.GetInstance();
+            await apiKeyManagement.Initialize();
             _voiceRecognition = new VoiceRecognition();
-            string str = await _voiceRecognition.VoiceRecognitionFromWavFile("test.wav", "ja-JP");
+            string str = await _voiceRecognition.VoiceRecognitionFromWavFile("test.wav", "ja-JP", apiKeyManagement.SpeechApiKey);
             Assert.IsNotNull(str);
             TestContext.WriteLine("output:" + str);
         }

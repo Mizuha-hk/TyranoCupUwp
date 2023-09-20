@@ -121,9 +121,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AccessDb.cs" />
+    <Compile Include="api\ISchedule.cs" />
     <Compile Include="api\INotification.cs" />
     <Compile Include="api\IAccessDb.cs" />
     <Compile Include="api\IRecord.cs" />
+    <Compile Include="Models\ScheduleModel.cs" />
+    <Compile Include="Schedule.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Counter.cs" />
     <Compile Include="Models\SaveAudioModel.cs" />

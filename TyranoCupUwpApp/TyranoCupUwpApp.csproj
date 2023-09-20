@@ -135,6 +135,9 @@
     <Compile Include="Views\Controls\AppointmentDescription.xaml.cs">
       <DependentUpon>AppointmentDescription.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\CustomCalendar.xaml.cs">
+      <DependentUpon>CustomCalendar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -160,11 +163,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\Controls\AppointmentCalendarView.xaml">
+    <Page Include="Views\Controls\AppointmentDescription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\AppointmentDescription.xaml">
+    <Page Include="Views\Controls\CustomCalendar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

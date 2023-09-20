@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,11 +18,27 @@ using Windows.UI.Xaml.Navigation;
 
 namespace TyranoCupUwpApp.Views.Controls
 {
-    public sealed partial class AppointmentCalendarView : UserControl
+    public sealed partial class CustomCalendar : UserControl
     {
-        public AppointmentCalendarView()
+        public CustomCalendar()
         {
             this.InitializeComponent();
         }
+
+        private List<EventOverView> Events { get; set; } = new List<EventOverView>() { new EventOverView() { Date = DateTime.Today , Subject ="Test" } };
+
+        private void MainCalendar_CalendarViewDayItemChanging(CalendarView sender, CalendarViewDayItemChangingEventArgs args)
+        {
+            args.Item.DataContext = Events
+                .Where(x => x.Date == args.Item.Date.Date)
+                .ToList();
+        }
+    }
+
+
+    public class EventOverView
+    {
+        public DateTime Date { get; set; }
+        public string Subject { get; set; }
     }
 }

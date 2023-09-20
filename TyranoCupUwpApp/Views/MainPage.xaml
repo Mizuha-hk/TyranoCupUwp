@@ -144,7 +144,12 @@
                                         x:Name="EndDatePicker"/>
                                     <TimePicker
                                         x:Name="EndTimePicker"
-                                        ClockIdentifier="12HourClock"/>                                    
+                                        ClockIdentifier="12HourClock"/>
+                                    <Button
+                                        x:Name="SubmitTextScheduleButton"
+                                        Background="{ThemeResource SystemAccentColorLight1}"
+                                        Foreground="White"
+                                        Content="Submit"/>
                                 </StackPanel>
                             </Flyout>
                         </Button.Flyout>

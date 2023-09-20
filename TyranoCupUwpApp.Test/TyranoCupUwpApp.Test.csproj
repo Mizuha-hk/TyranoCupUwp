@@ -121,6 +121,7 @@
   <ItemGroup>
     <Compile Include="NotificationTest.cs" />
     <Compile Include="AccessDbTest.cs" />
+    <Compile Include="OpenAIFormationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecordAudioTest.cs" />
     <Compile Include="UnitTestApp.xaml.cs">

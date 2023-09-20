@@ -11,6 +11,153 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        
+        <controls:NavigationView
+            IsBackButtonVisible="Collapsed"
+            PaneDisplayMode="Auto"
+            CompactModeThresholdWidth="1008" 
+            IsSettingsVisible="False"
+            >
+            <controls:NavigationView.MenuItems>
+                <controls:NavigationViewItem>
+                    <CalendarView
+                        x:Name="SideCalendar"
+                        HorizontalAlignment="Center"
+                        FontSize="10"
+                        Height="272"
+                        >
+                        <CalendarView.CalendarViewDayItemStyle>
+                            <Style TargetType="CalendarViewDayItem">
+                                <Setter Property="MinHeight" Value="10"/>
+                                <Setter Property="MinWidth" Value="10"/>
+                                <Setter Property="Width" Value="32"/>
+                                <Setter Property="Height" Value="32"/>
+                                <Setter Property="FontSize" Value="8"/>
+                            </Style>
+                        </CalendarView.CalendarViewDayItemStyle>
+                    </CalendarView>
+                </controls:NavigationViewItem>
+                <controls:NavigationViewItem>
+                    <TyControls:AppointmentDescription/>
+                </controls:NavigationViewItem>
+            </controls:NavigationView.MenuItems>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition
+                        Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <controls:NavigationView
+                    PaneDisplayMode="Top"
+                    IsBackButtonVisible="Collapsed"
+                    IsSettingsVisible="False">
+                    <TyControls:AppointmentCalendarView/>
+                </controls:NavigationView>
+                
+
+
+
+                <Grid
+                    Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition
+                            Width="Auto"/>
+                        <ColumnDefinition
+                            Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Background="{ThemeResource SystemAccentColorLight1}"
+                        Margin="4">
+                        <FontIcon 
+                            Foreground="White"
+                            FontFamily="Segoe Fluent Icons" 
+                            Glyph="&#xE720;"/>
+                    </Button>
+                    <TextBox
+                        x:Name="SpeechInputBox"
+                        x:Uid="/MainPageResource/SpeechInputBox"
+                        Grid.Column="1"
+                        HorizontalAlignment="Stretch"
+                        PlaceholderText="Type your schedule"
+                        Margin="4">
+                    </TextBox>
+                    <Button
+                        x:Name="SubmitButton"
+                        x:Uid="/MainPageResource/SubmitButton"
+                        Grid.Column="2"
+                        Foreground="White"
+                        Background="{ThemeResource SystemAccentColorLight1}"
+                        Margin="4"
+                        Content ="Submit"/>
+                    <Button
+                        x:Name="AddEventButton"
+                        x:Uid="/MainPageResource/AddEventButton"
+                        Grid.Column="3"
+                        Background="{ThemeResource SystemAccentColorLight1}"
+                        Foreground="White"
+                        Margin="4"
+                        Content="New Event">
+                        <Button.Flyout>
+                            <Flyout>
+                                <Flyout.FlyoutPresenterStyle>
+                                    <Style TargetType="FlyoutPresenter">
+                                        <Setter 
+                                            Property="ScrollViewer.HorizontalScrollMode"
+                                            Value="Disabled"/>
+                                        <Setter 
+                                            Property="ScrollViewer.HorizontalScrollBarVisibility" 
+                                            Value="Disabled"/>
+                                        <Setter 
+                                            Property="IsTabStop" 
+                                            Value="True"/>
+                                        <Setter 
+                                            Property="TabNavigation" 
+                                            Value="Cycle"/>
+                                    </Style>
+                                </Flyout.FlyoutPresenterStyle>
+                                <StackPanel>
+                                    <TextBox
+                                        Width="300"
+                                        Header="Schedule Title"/>
+                                    <TextBox
+                                        Margin="0, 8, 0, 0"
+                                        Width="300"
+                                        Header="Location"/>
+                                    <TextBlock
+                                        Margin="0, 8, 0, 0"
+                                        Text="Start Time:"/>
+                                    <DatePicker
+                                        Margin="0, 8"
+                                        x:Name="StartDatePicker"/>
+                                    <TimePicker
+                                        x:Name="StartTimePicker"
+                                        ClockIdentifier="12HourClock"/>
+                                    <TextBlock
+                                        Margin="0, 8, 0, 0"
+                                        Text="End Time"/>
+                                    <DatePicker
+                                        Margin="0, 8"
+                                        x:Name="EndDatePicker"/>
+                                    <TimePicker
+                                        x:Name="EndTimePicker"
+                                        ClockIdentifier="12HourClock"/>
+                                    <Button
+                                        x:Name="SubmitTextScheduleButton"
+                                        Background="{ThemeResource SystemAccentColorLight1}"
+                                        Foreground="White"
+                                        Content="Submit"/>
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+
+                </Grid>
+
+            </Grid>
+        </controls:NavigationView>
     </Grid>
 </Page>

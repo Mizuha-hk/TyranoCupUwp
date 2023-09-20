@@ -14,7 +14,8 @@
         <controls:NavigationView
             IsBackButtonVisible="Collapsed"
             PaneDisplayMode="Auto"
-            CompactModeThresholdWidth="1008"         
+            CompactModeThresholdWidth="1008" 
+            IsSettingsVisible="False"
             >
             <controls:NavigationView.MenuItems>
                 <controls:NavigationViewItem>
@@ -49,7 +50,8 @@
 
                 <controls:NavigationView
                     PaneDisplayMode="Top"
-                    IsBackButtonVisible="Collapsed">
+                    IsBackButtonVisible="Collapsed"
+                    IsSettingsVisible="False">
                     <TyControls:AppointmentCalendarView/>
                 </controls:NavigationView>
                 
@@ -64,6 +66,8 @@
                         <ColumnDefinition/>
                         <ColumnDefinition
                             Width="Auto"/>
+                        <ColumnDefinition
+                            Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Button
                         Background="{ThemeResource SystemAccentColorLight1}"
@@ -74,13 +78,25 @@
                             Glyph="&#xE720;"/>
                     </Button>
                     <TextBox
+                        x:Name="SpeechInputBox"
+                        x:Uid="/MainPageResource/SpeechInputBox"
                         Grid.Column="1"
                         HorizontalAlignment="Stretch"
                         PlaceholderText="Type your schedule"
                         Margin="4">
                     </TextBox>
                     <Button
+                        x:Name="SubmitButton"
+                        x:Uid="/MainPageResource/SubmitButton"
                         Grid.Column="2"
+                        Foreground="White"
+                        Background="{ThemeResource SystemAccentColorLight1}"
+                        Margin="4"
+                        Content ="Submit"/>
+                    <Button
+                        x:Name="AddEventButton"
+                        x:Uid="/MainPageResource/AddEventButton"
+                        Grid.Column="3"
                         Background="{ThemeResource SystemAccentColorLight1}"
                         Foreground="White"
                         Margin="4"

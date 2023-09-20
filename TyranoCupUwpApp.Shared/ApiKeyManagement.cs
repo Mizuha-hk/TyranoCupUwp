@@ -7,11 +7,15 @@ namespace TyranoCupUwpApp.Shared
 {
     public sealed class ApiKeyManagement
     {
-        private static ApiKeyManagement _apiKeyManagement = new ApiKeyManagement();
+        private static ApiKeyManagement _apiKeyManagement;
         private string _jsonstring = "";
         private ApiKeyManagement() { }
 
-        public static ApiKeyManagement GetInstance() { 
+        public static ApiKeyManagement GetInstance() {
+            if (_apiKeyManagement == null)
+            {
+                _apiKeyManagement = new ApiKeyManagement();
+            }
             return _apiKeyManagement;
         }
 

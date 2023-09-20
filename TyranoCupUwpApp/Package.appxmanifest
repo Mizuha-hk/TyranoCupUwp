@@ -45,5 +45,9 @@
 
   <Capabilities>
     <Capability Name="internetClient" />
+    <uap:Capability Name="appointments"/>
+    <uap:Capability Name="userAccountInformation"/>
+    <DeviceCapability Name="location"/>
+    <DeviceCapability Name="microphone"/>
   </Capabilities>
 </Package>

@@ -1,34 +1,16 @@
 ﻿using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using TyranoCupUwpApp.Shared.api;
-using Windows.Storage;
 
 namespace TyranoCupUwpApp.Shared
 {
     public class OpenAIFormation : IOpenAIFormation
     {
-        public string OpenAIApiKey { get; set; }
-
-        private class ApiKey
-        {
-            public string ChatGptApiKey { get; set; }
-        }
-
-        public async Task GetOpenAIApiKey()
-        {
-            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Properties/local.settings.json"));
-            string jsonstring = await FileIO.ReadTextAsync(file);
-            if (string.IsNullOrEmpty(jsonstring))
-            {
-                throw new Exception();
-            }
-            OpenAIApiKey = JsonSerializer.Deserialize<ApiKey>(jsonstring).ChatGptApiKey;
-        }
-
         public async Task<string> FormatTextToJson(string text)
         {
-            var api = new OpenAI_API.OpenAIAPI(OpenAIApiKey);
+            ApiKeyManagement apiKeyManagement = ApiKeyManagement.GetInstance();
+            await apiKeyManagement.Initialize();
+            var api = new OpenAI_API.OpenAIAPI(apiKeyManagement.OpenAIApiKey);
             var chat = api.Chat.CreateConversation();
 
             string prompt =

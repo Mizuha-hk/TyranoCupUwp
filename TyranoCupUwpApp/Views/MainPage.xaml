@@ -119,33 +119,61 @@
                                             Value="Cycle"/>
                                     </Style>
                                 </Flyout.FlyoutPresenterStyle>
-                                <StackPanel>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition
+                                            Height="Auto"/>
+                                        <RowDefinition
+                                            Height="Auto"/>
+                                        <RowDefinition
+                                            Height="Auto"/>
+                                        <RowDefinition
+                                            Height="Auto"/>
+                                        <RowDefinition
+                                            Height="Auto"/>
+                                        <RowDefinition
+                                            Height="Auto"/>
+                                        <RowDefinition
+                                            Height="Auto"/>
+                                        <RowDefinition
+                                            Height="Auto"/>
+                                    </Grid.RowDefinitions>
                                     <TextBox
+                                        Grid.Row="0"
                                         Width="300"
                                         Header="Schedule Title"/>
                                     <TextBox
+                                        Grid.Row="1"
                                         Margin="0, 8, 0, 0"
                                         Width="300"
                                         Header="Location"/>
                                     <TextBlock
+                                        Grid.Row="2"
                                         Margin="0, 8, 0, 0"
                                         Text="Start Time:"/>
                                     <DatePicker
+                                        Grid.Row="3"
                                         Margin="0, 8"
                                         x:Name="StartDatePicker"/>
                                     <TimePicker
+                                        Grid.Row="4"
                                         x:Name="StartTimePicker"
                                         ClockIdentifier="12HourClock"/>
-                                    <TextBlock
-                                        Margin="0, 8, 0, 0"
-                                        Text="End Time"/>
-                                    <DatePicker
-                                        Margin="0, 8"
-                                        x:Name="EndDatePicker"/>
-                                    <TimePicker
-                                        x:Name="EndTimePicker"
-                                        ClockIdentifier="12HourClock"/>                                    
-                                </StackPanel>
+                                    <Grid
+                                        Grid.Row="7">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <ComboBox
+                                            Grid.Column="0"
+                                            Header="Duration:"
+                                            PlaceholderText="時間">
+                                            <x:Int32>1</x:Int32>
+                                            <x:Int32>2</x:Int32>
+                                        </ComboBox>
+                                    </Grid>                                    
+                                </Grid>
                             </Flyout>
                         </Button.Flyout>
                     </Button>

@@ -122,11 +122,14 @@
   <ItemGroup>
     <Compile Include="AccessDb.cs" />
     <Compile Include="ApiKeyManagement.cs" />
+    <Compile Include="api\ISchedule.cs" />
     <Compile Include="api\INotification.cs" />
     <Compile Include="api\IAccessDb.cs" />
     <Compile Include="api\IOpenAIFormation.cs" />
     <Compile Include="api\IRecord.cs" />
     <Compile Include="api\IVoiceRecognition.cs" />
+    <Compile Include="Models\ScheduleModel.cs" />
+    <Compile Include="Schedule.cs" />
     <Compile Include="OpenAIFormation.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Counter.cs" />

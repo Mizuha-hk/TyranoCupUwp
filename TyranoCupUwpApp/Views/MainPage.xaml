@@ -155,14 +155,17 @@
                                 <StackPanel>
                                     <TextBox
                                         x:Name="SubjectBox"
+                                        x:Uid="/MainPageResource/SubjectBox"
                                         Width="300"
                                         Header="Schedule Title"/>
                                     <TextBox
                                         x:Name="LocationBox"
+                                        x:Uid="/MainPageResource/LocationBox"
                                         Margin="0, 8, 0, 0"
                                         Width="300"
                                         Header="Location"/>
                                     <TextBlock
+                                        x:Uid="/MainPageResource/StartTimeLabel"
                                         Margin="0, 8, 0, 0"
                                         Text="Start Time:"/>
                                     <DatePicker
@@ -173,6 +176,7 @@
                                         x:Name="StartTimePicker"
                                         ClockIdentifier="12HourClock"/>
                                     <TextBlock
+                                        x:Uid="/MainPageResource/EndTimeLabel"
                                         Text="End Time"
                                         Margin="0, 8, 0, 0"
                                         />
@@ -185,6 +189,7 @@
                                         ClockIdentifier="12HourClock"/>
                                     <Button
                                         x:Name="SubmitTextScheduleButton"
+                                        x:Uid="/MainPageResource/SubmitTextScheduleButton"
                                         Background="{ThemeResource SystemAccentColorLight1}"
                                         Foreground="White"
                                         Content="Submit"

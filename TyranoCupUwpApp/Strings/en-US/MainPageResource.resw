@@ -120,10 +120,25 @@
   <data name="AddEventButton.Content" xml:space="preserve">
     <value>New Event</value>
   </data>
+  <data name="EndTimeLabel.Text" xml:space="preserve">
+    <value>End Time :</value>
+  </data>
+  <data name="LocationBox.Header" xml:space="preserve">
+    <value>Location</value>
+  </data>
   <data name="SpeechInputBox.PlaceholderText" xml:space="preserve">
     <value>Type your schedule.</value>
   </data>
+  <data name="StartTimeLabel.Text" xml:space="preserve">
+    <value>Start Time :</value>
+  </data>
+  <data name="SubjectBox.Header" xml:space="preserve">
+    <value>Schesdule Subject</value>
+  </data>
   <data name="SubmitButton.Content" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="SubmitTextScheduleButton.Content" xml:space="preserve">
     <value>Submit</value>
   </data>
 </root>

@@ -9,12 +9,12 @@
   <Identity
     Name="9b4ce48e-903e-4d7b-b960-c143aff755d0"
     Publisher="CN=Mizuha"
-    Version="0.0.1.0" />
+    Version="0.1.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="9b4ce48e-903e-4d7b-b960-c143aff755d0" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>TyranoCupUwpApp</DisplayName>
+    <DisplayName>Echo Reminder</DisplayName>
     <PublisherDisplayName>Mizuha</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -32,10 +32,10 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="TyranoCupUwpApp.App">
       <uap:VisualElements
-        DisplayName="TyranoCupUwpApp"
+        DisplayName="Echo Reminder"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="TyranoCupUwpApp"
+        Description="Echo Reminder"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />

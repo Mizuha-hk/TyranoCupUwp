@@ -120,10 +120,25 @@
   <data name="AddEventButton.Content" xml:space="preserve">
     <value>新しい予定</value>
   </data>
+  <data name="EndTimeLabel.Text" xml:space="preserve">
+    <value>終了時刻</value>
+  </data>
+  <data name="LocationBox.Header" xml:space="preserve">
+    <value>場所</value>
+  </data>
   <data name="SpeechInputBox.PlaceholderText" xml:space="preserve">
     <value>予定を入力</value>
   </data>
+  <data name="StartTimeLabel.Text" xml:space="preserve">
+    <value>開始時刻</value>
+  </data>
+  <data name="SubjectBox.Header" xml:space="preserve">
+    <value>予定のタイトル</value>
+  </data>
   <data name="SubmitButton.Content" xml:space="preserve">
     <value>送信</value>
+  </data>
+  <data name="SubmitTextScheduleButton.Content" xml:space="preserve">
+    <value>登録</value>
   </data>
 </root>

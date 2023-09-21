@@ -28,9 +28,7 @@ namespace TyranoCupUwpApp.Views.Controls
             this.InitializeComponent();
         }
 
-        IList<ScheduleDetails> ScheduleDetailsList = new ObservableCollection<ScheduleDetails>() {
-            new ScheduleDetails() { Title = "test", StartTime = DateTime.Now, EndTime = DateTime.Now, Location = "test" },  
-        };
+        IList<ScheduleDetails> ScheduleDetailsList = new ObservableCollection<ScheduleDetails>();
 
         public void SetScheduleDetailsList(IList<Appointment> appointments, DateTimeOffset date)
         {

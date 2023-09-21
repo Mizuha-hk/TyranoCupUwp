@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
+using TyranoCupUwpApp.Shared.Models;
 
 namespace TyranoCupUwpApp.Shared.api
 {
     public interface IOpenAIFormation
     {
-        Task<string> FormatTextToJson(string text, string apiKey);
+        Task<ScheduleModel> FormatTextToJson(string text, string apiKey);
     }
 }

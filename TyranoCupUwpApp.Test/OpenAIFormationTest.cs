@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using TyranoCupUwpApp.Shared;
 using TyranoCupUwpApp.Shared.api;
+using TyranoCupUwpApp.Shared.Models;
 
 namespace TyranoCupUwpApp.Test
 {
@@ -23,9 +24,9 @@ namespace TyranoCupUwpApp.Test
             ApiKeyManagement apiKeyManagement = ApiKeyManagement.GetInstance();
             await apiKeyManagement.Initialize();
             _openAIFormation = new OpenAIFormation();
-            string res = await _openAIFormation.FormatTextToJson("明日の18時から21時まで最寄りのコンビニでバイト", apiKeyManagement.OpenAIApiKey);
+            ScheduleModel res = await _openAIFormation.FormatTextToJson("明日の18時から21時まで最寄りのコンビニでバイト", apiKeyManagement.OpenAIApiKey);
             Assert.IsNotNull(res);
-            TestContext.WriteLine("response:" + res);
+            TestContext.WriteLine("response:" + res.Subject);
         }
     }
 }

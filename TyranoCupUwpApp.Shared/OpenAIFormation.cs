@@ -15,7 +15,7 @@ namespace TyranoCupUwpApp.Shared
             public int[] EndTime { get; private set; }
             public string Location { get; private set; }
         }
-        public async Task<string> FormatTextToJson(string text, string apiKey)
+        public async Task<ScheduleModel> FormatTextToJson(string text, string apiKey)
         {
             var api = new OpenAI_API.OpenAIAPI(apiKey);
             var chat = api.Chat.CreateConversation();
@@ -53,19 +53,21 @@ namespace TyranoCupUwpApp.Shared
                 "{" + text + "}";
             chat.AppendUserInput(prompt);
             string response = await chat.GetResponseFromChatbotAsync();
-            Deserialize(response);
-            return response;
+            return Deserialize(response);
         }
 
-        private void Deserialize(string response)
+        private ScheduleModel Deserialize(string response)
         {
-            ScheduleModel scheduleModel = ScheduleModel.GetInstance();
-            scheduleModel.Subject = "" + JsonSerializer.Deserialize<Data>(response).Title;
-            scheduleModel.Location = "" + JsonSerializer.Deserialize<Data>(response).Location;
-            int[] startTime = JsonSerializer.Deserialize<Data>(response).StartTime;
-            int[] endTime = JsonSerializer.Deserialize<Data>(response).EndTime;
+            var data = JsonSerializer.Deserialize<Data>(response);
+
+            ScheduleModel scheduleModel = new ScheduleModel();
+            scheduleModel.Subject = "" + data.Title;
+            scheduleModel.Location = "" + data.Location;
+            int[] startTime = data.StartTime;
+            int[] endTime = data.EndTime;
             if (startTime != null) scheduleModel.StartTime = new DateTime(startTime[0], startTime[1], startTime[2], startTime[3], startTime[4], 0);
             if (endTime != null) scheduleModel.Duration = (new DateTime(endTime[0], endTime[1], endTime[2], endTime[3], endTime[4], 0) - scheduleModel.StartTime);
+            return scheduleModel;
         }
     }
 }

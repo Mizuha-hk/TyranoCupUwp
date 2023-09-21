@@ -9,7 +9,8 @@ using Windows.Storage;
 
 namespace TyranoCupUwpApp.Shared
 {
-    public class VoiceRecognition : IVoiceRecognition {
+    public class VoiceRecognition : IVoiceRecognition 
+    {
         public async Task<string> VoiceRecognitionFromWavFile(string wavFile, string language, string apiKey)
         {
             var stopRecognitionTaskCompletionSource = new TaskCompletionSource<int>(

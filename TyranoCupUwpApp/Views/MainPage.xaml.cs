@@ -75,7 +75,7 @@ namespace TyranoCupUwpApp
             {
                 SpeechButtonIcon.Glyph = "\uE720";
                 var fileName = await recordEngine.StopRecording();           
-                var result = await voiceRecognitionEngine.VoiceRecognitionFromWavFile(fileName, GlobalizationPreferences.Languages[0]);
+                
 
             }
             else

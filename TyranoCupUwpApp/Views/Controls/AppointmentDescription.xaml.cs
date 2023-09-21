@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 using TyranoCupUwpApp.Models;
+using Windows.ApplicationModel.Appointments;
 
 // ユーザー コントロールの項目テンプレートについては、https://go.microsoft.com/fwlink/?LinkId=234236 を参照してください
 
@@ -27,11 +28,29 @@ namespace TyranoCupUwpApp.Views.Controls
             this.InitializeComponent();
         }
 
-        ObservableCollection<ScheduleDetails> ScheduleDetailsList = new ObservableCollection<ScheduleDetails>()
-        {
-            new ScheduleDetails(){ Title = "hoge", Location = "location1", StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(1)  },
-            new ScheduleDetails(){ Title = "fuga", Location = "location2", StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(1)  },
-            new ScheduleDetails(){ Title = "piyo", Location = "location3", StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(1)  },
+        IList<ScheduleDetails> ScheduleDetailsList = new ObservableCollection<ScheduleDetails>() {
+            new ScheduleDetails() { Title = "test", StartTime = DateTime.Now, EndTime = DateTime.Now, Location = "test" },  
         };
+
+        public void SetScheduleDetailsList(IList<Appointment> appointments, DateTimeOffset date)
+        {
+            ScheduleDetailsList.Clear();
+
+            var dayAppointments = appointments
+                .Where(x => x.StartTime.Date == date.Date);
+
+            foreach (var appointment in dayAppointments)
+            {
+                ScheduleDetailsList.Add(new ScheduleDetails() 
+                { 
+                    Title = appointment.Subject,
+                    StartTime = appointment.StartTime.Date,
+                    EndTime = appointment.StartTime.AddDays(appointment.Duration.Days).Date,
+                    Location = appointment.Location,
+                });
+            }
+
+            InitializeComponent();
+        }
     }
 }

@@ -132,7 +132,6 @@
     <Compile Include="Schedule.cs" />
     <Compile Include="OpenAIFormation.cs" />
     <Compile Include="Notification.cs" />
-    <Compile Include="Counter.cs" />
     <Compile Include="Models\SaveAudioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Record.cs" />

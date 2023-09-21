@@ -41,6 +41,11 @@ namespace TyranoCupUwpApp
         private IList<Appointment> appointments = new List<Appointment>();
         private IRecord recordEngine = new Record();
         private IVoiceRecognition voiceRecognitionEngine = new VoiceRecognition();
+        private ApiKeyManagement apiKeyManagement = ApiKeyManagement.GetInstance();
+        private IOpenAIFormation openAIFormationEngine = new OpenAIFormation();
+        private ISchedule scheduleEngine = new Schedule();
+        private INotification notificationEngine = new Notification();
+        private IAccessDb db = new AccessDb();
 
         private List<EventOverView> Events { get; set; } = new List<EventOverView>();
 
@@ -66,7 +71,8 @@ namespace TyranoCupUwpApp
 
         private async void MainPage_LoadedAsync(object sender, RoutedEventArgs e)
         {
-            
+            await apiKeyManagement.Initialize();
+            await db.InitializeDatabase();
         }
 
         private async void SpeechButton_Click(object sender, RoutedEventArgs e)
@@ -74,9 +80,29 @@ namespace TyranoCupUwpApp
             if(recordEngine.IsRecording)
             {
                 SpeechButtonIcon.Glyph = "\uE720";
-                var fileName = await recordEngine.StopRecording();           
-                
+                var fileName = await recordEngine.StopRecording();
+                var text = await voiceRecognitionEngine.VoiceRecognitionFromWavFile(fileName + ".wav", "ja-JP", apiKeyManagement.SpeechApiKey );
+                await openAIFormationEngine.FormatTextToJson(text, apiKeyManagement.OpenAIApiKey);
+                var id = await scheduleEngine.Add(ScheduleModel.GetInstance());
+                notificationEngine.Schedule(
+                    id,
+                    ScheduleModel
+                        .GetInstance()
+                        .Subject,
+                    fileName,
+                    ScheduleModel
+                        .GetInstance()
+                        .StartTime
+                        .AddMinutes(-30)
+                        .Date);
+                db.Create(new SaveAudioModel() { AppointmentId = id, AudioId = fileName });
 
+                ContentDialog noWifiDialog = new ContentDialog
+                {
+                    Title = "Schedule Completed !",
+                    Content = $"Title : {ScheduleModel.GetInstance().Subject} \r\n StartTime : {ScheduleModel.GetInstance().StartTime}",
+                    CloseButtonText = "finish"
+                };
             }
             else
             {
@@ -114,6 +140,26 @@ namespace TyranoCupUwpApp
 
                 var date = args.AddedDates.First();
                 DescriptionView.SetScheduleDetailsList(appointments, date);
+            }
+        }
+
+        private async void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(!string.IsNullOrEmpty(SpeechInputBox.Text))
+            {
+                await openAIFormationEngine.FormatTextToJson(SpeechInputBox.Text, apiKeyManagement.OpenAIApiKey);
+                var id = await scheduleEngine.Add(ScheduleModel.GetInstance());
+                notificationEngine.Schedule(
+                    id,
+                    ScheduleModel
+                        .GetInstance()
+                        .Subject,
+                    "",
+                    ScheduleModel
+                        .GetInstance()
+                        .StartTime
+                        .AddMinutes(-30)
+                        .Date);
             }
         }
     }

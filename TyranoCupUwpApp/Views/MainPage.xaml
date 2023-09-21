@@ -124,7 +124,8 @@
                         Foreground="White"
                         Background="{ThemeResource SystemAccentColorLight1}"
                         Margin="4"
-                        Content ="Submit"/>
+                        Content ="Submit"
+                        Click="SubmitButton_Click"/>
                     <Button
                         x:Name="AddEventButton"
                         x:Uid="/MainPageResource/AddEventButton"

@@ -10,10 +10,10 @@ namespace TyranoCupUwpApp.Shared
     {
         private class Data
         {
-            public string Title { get; private set; }
-            public int[] StartTime { get; private set; }
-            public int[] EndTime { get; private set; }
-            public string Location { get; private set; }
+            public string Title { get; set; }
+            public int[] StartTime { get; set; }
+            public int[] EndTime { get; set; }
+            public string Location { get; set; }
         }
         public async Task<ScheduleModel> FormatTextToJson(string text, string apiKey)
         {
@@ -60,7 +60,7 @@ namespace TyranoCupUwpApp.Shared
         {
             var data = JsonSerializer.Deserialize<Data>(response);
 
-            ScheduleModel scheduleModel = new ScheduleModel();
+            ScheduleModel scheduleModel = ScheduleModel.GetInstance();
             scheduleModel.Subject = "" + data.Title;
             scheduleModel.Location = "" + data.Location;
             int[] startTime = data.StartTime;

@@ -24,6 +24,7 @@
                         HorizontalAlignment="Center"
                         FontSize="10"
                         Height="272"
+                        Margin="4"
                         SelectedDatesChanged="SideCalendar_SelectedDatesChanged"
                         >
                         <CalendarView.CalendarViewDayItemStyle>
@@ -38,7 +39,9 @@
                     </CalendarView>
                 </controls:NavigationViewItem>
                 <controls:NavigationViewItem>
-                    <TyControls:AppointmentDescription/>
+                    <TyControls:AppointmentDescription
+                        x:Name="DescriptionView"
+                        Margin="4"/>
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
 

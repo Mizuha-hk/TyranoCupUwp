@@ -466,13 +466,13 @@
                                 <DataTemplate>
                                     <Grid>
                                         <Border
-                                        CornerRadius="4"
-                                        BorderBrush="{ThemeResource SystemAccentColorLight1}"
-                                        BorderThickness="2 0"
-                                        Background="{ThemeResource SystemAccentColorDark1}"
-                                        Margin="-4 0">
+                                            CornerRadius="4"
+                                            BorderBrush="{ThemeResource SystemAccentColorLight1}"
+                                            BorderThickness="2 0"
+                                            Background="{ThemeResource SystemAccentColorDark1}"
+                                            Margin="-4 0">
                                             <TextBlock
-                                            Text="{Binding Subject}"/>
+                                                Text="{Binding Subject}"/>
                                         </Border>
                                     </Grid>
                                 </DataTemplate>

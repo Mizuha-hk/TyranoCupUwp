@@ -17,6 +17,26 @@
             CompactModeThresholdWidth="1008" 
             IsSettingsVisible="False"
             >
+            <controls:NavigationView.PaneHeader>
+                <StackPanel
+                    CornerRadius="4"
+                    Background="White"
+                    Orientation="Horizontal"
+                    Margin="4 4 64 4">
+                    <Image
+                        Source="/Assets/Square44x44Logo.scale-400.png"
+                        Width="32"
+                        Height="32"
+                        Margin="4"/>
+                    <TextBlock
+                        Text="Sample"
+                        FontSize="24"
+                        Foreground="Black"
+                        VerticalAlignment="Center"
+                        Margin="4"/>
+
+                </StackPanel>
+            </controls:NavigationView.PaneHeader>
             <controls:NavigationView.MenuItems>
                 <controls:NavigationViewItem>
                     <CalendarView

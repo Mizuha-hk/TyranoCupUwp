@@ -1,8 +1,7 @@
 ﻿
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using TyranoCupUwpApp.Shared;
-using Windows.ApplicationModel;
 
 namespace TyranoCupUwpApp.Test
 {

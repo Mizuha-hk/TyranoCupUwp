@@ -9,19 +9,19 @@ using Windows.Storage;
 
 namespace TyranoCupUwpApp.Shared
 {
-    public class VoiceRecognition : IVoiceRecognition 
+    public class VoiceRecognition : IVoiceRecognition
     {
         public async Task<string> VoiceRecognitionFromWavFile(string wavFile, string language, string apiKey)
         {
             var stopRecognitionTaskCompletionSource = new TaskCompletionSource<int>(
                 TaskCreationOptions.RunContinuationsAsynchronously);
-            if(string.IsNullOrEmpty(apiKey) || string.IsNullOrEmpty(language))
+            if (string.IsNullOrEmpty(apiKey) || string.IsNullOrEmpty(language))
             {
                 throw new Exception();
             }
             StorageFolder storageFolder = Package.Current.InstalledLocation;
             StorageFile file = await storageFolder.GetFileAsync(wavFile);
-            if(file != null)
+            if (file != null)
             {
                 var config = SpeechConfig.FromSubscription(apiKey, "japanwest");
                 config.SpeechRecognitionLanguage = language;
@@ -53,7 +53,8 @@ namespace TyranoCupUwpApp.Shared
                     }
                 }
             }
-            else {
+            else
+            {
                 throw new FileNotFoundException();
             }
         }

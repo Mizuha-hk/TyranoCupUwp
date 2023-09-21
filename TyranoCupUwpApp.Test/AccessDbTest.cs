@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Threading.Tasks;
-using TyranoCupUwpApp.Shared.Models;
-using Windows.Media.Audio;
 using TyranoCupUwpApp.Shared;
 using TyranoCupUwpApp.Shared.api;
+using TyranoCupUwpApp.Shared.Models;
 
 namespace TyranoCupUwpApp.Test
 {
@@ -38,7 +33,7 @@ namespace TyranoCupUwpApp.Test
             Assert.IsNotNull(model);
             Assert.AreEqual(model.AppointmentId, guid);
             Assert.AreEqual(model.AudioId, "2");
-            
+
             _accessDb.Delete(guid);
             model = _accessDb.Read(guid);
             Assert.IsNull(model);

@@ -11,7 +11,8 @@ namespace TyranoCupUwpApp.Shared
         private string _jsonstring = "";
         private ApiKeyManagement() { }
 
-        public static ApiKeyManagement GetInstance() {
+        public static ApiKeyManagement GetInstance()
+        {
             if (_apiKeyManagement == null)
             {
                 _apiKeyManagement = new ApiKeyManagement();

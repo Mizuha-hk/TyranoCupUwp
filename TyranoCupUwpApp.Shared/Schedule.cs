@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TyranoCupUwpApp.Shared.api;
 using TyranoCupUwpApp.Shared.Models;
 using Windows.ApplicationModel.Appointments;
 using Windows.Foundation;
 using Windows.System;
-using Windows.UI.Core;
 
 namespace TyranoCupUwpApp.Shared
 {
@@ -42,7 +38,7 @@ namespace TyranoCupUwpApp.Shared
 
         public async Task<bool> Remove(string LocalId)
         {
-            if(string.IsNullOrEmpty(LocalId)) return false;
+            if (string.IsNullOrEmpty(LocalId)) return false;
             var amfu = AppointmentManager.GetForUser(User.GetDefault());
             var asr = await amfu.RequestStoreAsync(AppointmentStoreAccessType.AllCalendarsReadOnly);
             return await asr.ShowRemoveAppointmentAsync(LocalId, new Rect());

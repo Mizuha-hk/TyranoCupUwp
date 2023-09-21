@@ -1,14 +1,10 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Data.Sqlite;
-using Windows.Storage;
-
 using TyranoCupUwpApp.Shared.api;
 using TyranoCupUwpApp.Shared.Models;
+using Windows.Storage;
 
 namespace TyranoCupUwpApp.Shared
 {

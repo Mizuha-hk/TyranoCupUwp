@@ -1,25 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.System;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
 using TyranoCupUwpApp.Shared;
 using TyranoCupUwpApp.Shared.api;
 using TyranoCupUwpApp.Shared.Models;
-using Windows.System.UserProfile;
 using Windows.ApplicationModel.Appointments;
-using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 // 空白ページの項目テンプレートについては、https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x411 を参照してください
 
@@ -38,7 +26,9 @@ namespace TyranoCupUwpApp
         }
 
         #region parameters
-        private IList<Appointment> appointments = new List<Appointment>();
+        private IList<Appointment> appointments = new ObservableCollection<Appointment>();
+        private IList<EventOverView> Events { get; set; } = new ObservableCollection<EventOverView>();
+
         private IRecord recordEngine = new Record();
         private IVoiceRecognition voiceRecognitionEngine = new VoiceRecognition();
         private ApiKeyManagement apiKeyManagement = ApiKeyManagement.GetInstance();
@@ -46,8 +36,6 @@ namespace TyranoCupUwpApp
         private ISchedule scheduleEngine = new Schedule();
         private INotification notificationEngine = new Notification();
         private IAccessDb db = new AccessDb();
-
-        private List<EventOverView> Events { get; set; } = new List<EventOverView>();
 
         #endregion
 
@@ -77,37 +65,74 @@ namespace TyranoCupUwpApp
 
         private async void SpeechButton_Click(object sender, RoutedEventArgs e)
         {
-            if(recordEngine.IsRecording)
+            if (recordEngine.IsRecording)
             {
                 SpeechButtonIcon.Glyph = "\uE720";
+
                 var fileName = await recordEngine.StopRecording();
-                var text = await voiceRecognitionEngine.VoiceRecognitionFromWavFile(fileName + ".wav", "ja-JP", apiKeyManagement.SpeechApiKey );
-                await openAIFormationEngine.FormatTextToJson(text, apiKeyManagement.OpenAIApiKey);
-                var id = await scheduleEngine.Add(ScheduleModel.GetInstance());
+                var text = await voiceRecognitionEngine.VoiceRecognitionFromWavFile(fileName + ".wav", "ja-JP", apiKeyManagement.SpeechApiKey);
+                var data = await openAIFormationEngine.FormatTextToJson(text, apiKeyManagement.OpenAIApiKey);
+                if (data == null || data.Subject == string.Empty)
+                {
+                    ContentDialog failedDialog = new ContentDialog
+                    {
+                        Title = "Schedule Failed !",
+                        CloseButtonText = "Ok"
+                    };
+
+                    await failedDialog.ShowAsync();
+                    return;
+                }
+
+                var id = await scheduleEngine.Add(data);
+
+                if (id == null)
+                {
+                    ContentDialog failedDialog = new ContentDialog
+                    {
+                        Title = "Schedule Canceled !",
+                        Content = $"Subject : {data.Subject} \r\n StartTime : {data.StartTime}\r\n Duration : {data.Duration}",
+                        CloseButtonText = "Ok"
+                    };
+
+                    await failedDialog.ShowAsync();
+                    return;
+                }
+
                 notificationEngine.Schedule(
                     id,
-                    ScheduleModel
-                        .GetInstance()
-                        .Subject,
+                    data.Subject,
                     fileName,
-                    ScheduleModel
-                        .GetInstance()
-                        .StartTime
-                        .AddMinutes(-30)
-                        .Date);
+                    data.StartTime.AddMinutes(-30).Date < DateTime.Now
+                        ? DateTime.Now.AddSeconds(5)
+                        : data.StartTime.AddMinutes(-30).Date);
+
+                appointments.Add(new Appointment()
+                {
+                    Subject = data.Subject,
+                    StartTime = data.StartTime,
+                    Duration = data.Duration,
+                    Location = data.Location,
+                    Reminder = data.Reminder
+                });
+
+                Events.Add(new EventOverView() { Date = data.StartTime.Date, Subject = data.Subject });
+
                 db.Create(new SaveAudioModel() { AppointmentId = id, AudioId = fileName });
 
-                ContentDialog noWifiDialog = new ContentDialog
+                ContentDialog Dialog = new ContentDialog
                 {
                     Title = "Schedule Completed !",
-                    Content = $"Title : {ScheduleModel.GetInstance().Subject} \r\n StartTime : {ScheduleModel.GetInstance().StartTime}",
-                    CloseButtonText = "finish"
+                    Content = $"Title : {data.Subject} \r\n StartTime : {data.StartTime}\r\n Duration : {data.Duration}",
+                    CloseButtonText = "Ok"
                 };
+
+                await Dialog.ShowAsync();
             }
             else
             {
+                await recordEngine.StartRecording();
                 SpeechButtonIcon.Glyph = "\uE71A";
-                await recordEngine.StartRecording();               
             }
         }
 
@@ -117,16 +142,16 @@ namespace TyranoCupUwpApp
                 .Where(x => x.Date == args.Item.Date.Date)
                 .ToList();
 
-            if(args.Phase == 0)
+            if (args.Phase == 0)
             {
                 args.RegisterUpdateCallback(MainCalendar_CalendarViewDayItemChanging);
             }
-            
+
         }
 
         private void SideCalendar_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args)
         {
-            if(args.AddedDates.Count > 0)
+            if (args.AddedDates.Count > 0)
             {
                 MainCalendar.SetDisplayDate(args.AddedDates.First());
             }
@@ -145,22 +170,84 @@ namespace TyranoCupUwpApp
 
         private async void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(SpeechInputBox.Text))
+            if (!string.IsNullOrEmpty(SpeechInputBox.Text))
             {
-                await openAIFormationEngine.FormatTextToJson(SpeechInputBox.Text, apiKeyManagement.OpenAIApiKey);
-                var id = await scheduleEngine.Add(ScheduleModel.GetInstance());
-                notificationEngine.Schedule(
-                    id,
-                    ScheduleModel
-                        .GetInstance()
-                        .Subject,
-                    "",
-                    ScheduleModel
-                        .GetInstance()
-                        .StartTime
-                        .AddMinutes(-30)
-                        .Date);
+                var data = await openAIFormationEngine.FormatTextToJson(SpeechInputBox.Text, apiKeyManagement.OpenAIApiKey);
+                if (data == null || data.Subject == string.Empty)
+                {
+                    ContentDialog faledDialog = new ContentDialog
+                    {
+                        Title = "Schedule Failed !",
+                        CloseButtonText = "Ok"
+                    };
+                    await faledDialog.ShowAsync();
+                    return;
+                }
+                var id = await scheduleEngine.Add(data);
+
+                if (id == null)
+                {
+                    ContentDialog canceledDialog = new ContentDialog
+                    {
+                        Title = "Schedule Canceled !",
+                        Content = $"Subject : {data.Subject} \r\n StartTime : {data.StartTime}\r\n Duration : {data.Duration}",
+                        CloseButtonText = "Ok"
+                    };
+                    await canceledDialog.ShowAsync();
+                }
+                appointments.Add(new Appointment()
+                {
+                    Subject = data.Subject,
+                    StartTime = data.StartTime,
+                    Duration = data.Duration,
+                    Location = data.Location,
+                    Reminder = data.Reminder
+                });
+
+                Events.Add(new EventOverView() { Date = data.StartTime.Date, Subject = data.Subject });
+
+
+                ContentDialog contentDialog = new ContentDialog
+                {
+                    Title = "Schedule Completed !",
+                    Content = $"Title : {data.Subject} \r\n StartTime : {data.StartTime} \r\n Duration : {data.Duration}",
+                    CloseButtonText = "Finish"
+                };
+
+
+                await contentDialog.ShowAsync();
             }
+        }
+
+        private async void SubmitTextScheduleButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(
+                string.IsNullOrWhiteSpace(SubjectBox.Text)
+                || StartDatePicker.SelectedDate == null
+                || StartTimePicker.SelectedTime == null
+                || EndDatePicker.SelectedDate == null
+                || EndTimePicker.SelectedTime == null))
+            {
+                var data = ScheduleModel.GetInstance();
+                data.Subject = SubjectBox.Text;
+                data.Location = LocationBox.Text;
+                data.StartTime = StartDatePicker.SelectedDate.Value.Date + StartTimePicker.SelectedTime.Value;
+                data.Duration = EndDatePicker.SelectedDate.Value.Date + EndTimePicker.SelectedTime.Value - StartDatePicker.SelectedDate.Value.Date - StartTimePicker.Time;
+
+                appointments.Add(new Appointment()
+                {
+                    Subject = data.Subject,
+                    StartTime = data.StartTime,
+                    Duration = data.Duration,
+                    Location = data.Location,
+                    Reminder = data.Reminder
+                });
+
+                Events.Add(new EventOverView() { Date = data.StartTime.Date, Subject = data.Subject });
+
+                await scheduleEngine.Add(data);
+            }
+
         }
     }
 

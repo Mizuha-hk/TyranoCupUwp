@@ -1,18 +1,15 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.Notifications; // Notifications library
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Toolkit.Uwp.Notifications; // Notifications library
 using TyranoCupUwpApp.Shared.api;
-using Windows.ApplicationModel;
 using Windows.Foundation.Metadata;
 using Windows.System.Profile;
 using Windows.UI.Notifications;
 
 namespace TyranoCupUwpApp.Shared
 {
-    public class Notification: INotification
+    public class Notification : INotification
     {
         public void Schedule(
             string tag,
@@ -45,7 +42,8 @@ namespace TyranoCupUwpApp.Shared
                 });
         }
 
-        public void Remove(string tag) {
+        public void Remove(string tag)
+        {
             ToastNotifierCompat notifier = ToastNotificationManagerCompat.CreateToastNotifier();
             IReadOnlyList<ScheduledToastNotification> scheduledToasts = notifier.GetScheduledToastNotifications();
             var toRemove = scheduledToasts.FirstOrDefault(i => i.Tag == tag && i.Group == "Tyranno");

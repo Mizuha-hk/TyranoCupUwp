@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TyranoCupUwpApp.Shared.Models
+﻿namespace TyranoCupUwpApp.Shared.Models
 {
     public class SaveAudioModel
     {

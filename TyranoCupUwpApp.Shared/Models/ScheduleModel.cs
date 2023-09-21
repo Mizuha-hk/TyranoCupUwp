@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TyranoCupUwpApp.Shared.Models
 {
@@ -20,9 +16,10 @@ namespace TyranoCupUwpApp.Shared.Models
             }
             return _scheduleModel;
         }
+
         public string Subject { get; set; }
         public DateTimeOffset StartTime { get; set; } = DateTimeOffset.MinValue;
-        public TimeSpan Duration { get; set; } = TimeSpan.Zero;
+        public TimeSpan Duration { get; set; } = TimeSpan.FromMinutes(30);
         public string Location { get; set; }
         public TimeSpan Reminder { get; set; }
     }

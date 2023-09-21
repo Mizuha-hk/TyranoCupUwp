@@ -22,14 +22,14 @@
                     CornerRadius="4"
                     Background="White"
                     Orientation="Horizontal"
-                    Margin="4 4 64 4">
+                    Margin="8 4 64 4">
                     <Image
                         Source="/Assets/Square44x44Logo.scale-400.png"
                         Width="32"
                         Height="32"
                         Margin="4"/>
                     <TextBlock
-                        Text="Sample"
+                        Text="Echo Reminder"
                         FontSize="24"
                         Foreground="Black"
                         VerticalAlignment="Center"
@@ -154,9 +154,11 @@
                                 </Flyout.FlyoutPresenterStyle>
                                 <StackPanel>
                                     <TextBox
+                                        x:Name="SubjectBox"
                                         Width="300"
                                         Header="Schedule Title"/>
                                     <TextBox
+                                        x:Name="LocationBox"
                                         Margin="0, 8, 0, 0"
                                         Width="300"
                                         Header="Location"/>
@@ -164,17 +166,20 @@
                                         Margin="0, 8, 0, 0"
                                         Text="Start Time:"/>
                                     <DatePicker
+                                        x:Name="StartDatePicker"                       
                                         Margin="0, 8"
-                                        x:Name="StartDatePicker"/>
+                                        />
                                     <TimePicker
                                         x:Name="StartTimePicker"
                                         ClockIdentifier="12HourClock"/>
                                     <TextBlock
+                                        Text="End Time"
                                         Margin="0, 8, 0, 0"
-                                        Text="End Time"/>
+                                        />
                                     <DatePicker
+                                        x:Name="EndDatePicker"
                                         Margin="0, 8"
-                                        x:Name="EndDatePicker"/>
+                                        />
                                     <TimePicker
                                         x:Name="EndTimePicker"
                                         ClockIdentifier="12HourClock"/>
@@ -182,7 +187,9 @@
                                         x:Name="SubmitTextScheduleButton"
                                         Background="{ThemeResource SystemAccentColorLight1}"
                                         Foreground="White"
-                                        Content="Submit"/>
+                                        Content="Submit"
+                                        Margin="4"
+                                        Click="SubmitTextScheduleButton_Click"/>
                                 </StackPanel>
                             </Flyout>
                         </Button.Flyout>

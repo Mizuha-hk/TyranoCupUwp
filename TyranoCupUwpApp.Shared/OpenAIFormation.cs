@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TyranoCupUwpApp.Shared.api;
@@ -54,8 +55,16 @@ namespace TyranoCupUwpApp.Shared
                 "# 入力文：\r\n" +
                 "{" + text + "}";
             chat.AppendUserInput(prompt);
-            string response = await chat.GetResponseFromChatbotAsync();
-            return Deserialize(response);
+            string response;
+            try
+            {
+                response = await chat.GetResponseFromChatbotAsync();
+                return Deserialize(response);
+            }
+            catch (HttpRequestException)
+            {
+                return null;
+            }
         }
 
         private ScheduleModel Deserialize(string response)

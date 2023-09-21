@@ -1,0 +1,98 @@
+﻿<UserControl
+    x:Class="TyranoCupUwpApp.Views.Controls.AppointmentDescription"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TyranoCupUwpApp.Views.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:TyranoCupUwpApp.Models"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    MaxHeight="264">
+
+    <Grid
+        Background="{ThemeResource SystemControlChromeLowAcrylicWindowBrush}"
+        CornerRadius="8"
+        Height="280">
+        <ScrollViewer>
+            <ListView
+                x:Name="AppDescription"
+                ItemsSource="{x:Bind ScheduleDetailsList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:ScheduleDetails">
+                        <Grid
+                            BorderBrush="{ThemeResource SystemControlBackgroundAccentRevealBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Margin="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition
+                                    Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition
+                                    Height="1*"/>
+                                <RowDefinition
+                                    Height="2*"/>
+                                <RowDefinition
+                                    Height="1*"/>
+                            </Grid.RowDefinitions>
+
+                            <Border
+                                BorderBrush="{ThemeResource SystemAccentColorDark1}"
+                                BorderThickness="0 0 0 0.5"
+                                Background="{ThemeResource SystemChromeAltHighColor}"/>
+
+                            <FontIcon
+                                Grid.Row="1"
+                                VerticalAlignment="Center"
+                                Margin="4, 0, 4, 8"
+                                FontSize="16"
+                                FontFamily="Segoe Fluent Icons" 
+                                Glyph="&#xE823;"/>
+                            <FontIcon
+                                Grid.Row="2"
+                                Margin="4, 0, 4, 0"
+                                FontSize="16"
+                                FontFamily="Segoe Fluent Icons"
+                                Glyph="&#xEcaf;"/>
+
+                            <Border
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                BorderBrush="{ThemeResource SystemAccentColorDark1}"
+                                BorderThickness="0 0 0 0.5"
+                                Background="{ThemeResource SystemChromeAltHighColor}">
+                                <TextBlock
+                                    FontSize="20"
+                                    Margin="0, 4, 0, 0"
+                                    Text="{x:Bind Title}"
+                                    TextDecorations="Underline"/>
+                            </Border>
+                            
+                            <StackPanel
+                                Grid.Row="1"
+                                Grid.Column="1">
+                                <TextBlock
+                                    Text="{x:Bind StartTime}"/>
+                                <TextBlock
+                                    Text="{x:Bind EndTime}"/>
+                            </StackPanel>
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="0, 4, 0, 0"
+                                FontSize="16"
+                                Text="{x:Bind Location}"/>
+                        </Grid>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+            </ListView>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

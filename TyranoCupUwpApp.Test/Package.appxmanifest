@@ -42,5 +42,12 @@
   <Capabilities>
     <Capability Name="internetClientServer" />
     <Capability Name="privateNetworkClientServer" />
+    <uap:Capability Name="musicLibrary"/>
+    <uap:Capability Name="userAccountInformation"/>
+    <uap:Capability Name="appointments"/>
+    <uap:Capability Name="picturesLibrary"/>
+    <uap:Capability Name="videosLibrary"/>
+    <DeviceCapability Name="microphone"/>
+    <DeviceCapability Name="location"/>
   </Capabilities>
 </Package>
